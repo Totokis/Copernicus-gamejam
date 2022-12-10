@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1731746673099801540}
   - component: {fileID: 1731746673099801543}
   - component: {fileID: 965928935234555287}
+  - component: {fileID: 4033173069176978025}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1731746673099801543
 SpriteRenderer:
@@ -97,3 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8891922ebaa31384391284384f7462e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentNode: {fileID: 0}
+  PlayerPossibleMovesRenderer: {fileID: 0}
+--- !u!114 &4033173069176978025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731746673099801542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32934178c0b0af4b9662f19787d1e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objUpArrow: {fileID: 8110196329076325900, guid: 080b68541f602d044957e3330c10b218, type: 3}
+  objDownArrow: {fileID: 888159972905714839, guid: 2c206fc8add3e2b4db7407b4fcafa13f, type: 3}
+  objLeftArrow: {fileID: 888159972905714839, guid: 430ac952abbf4b54fb272a56b4e64384, type: 3}
+  objRightArrow: {fileID: 888159972905714839, guid: 1a8ac2b325c9d3d47a84a202df05dbd9, type: 3}
