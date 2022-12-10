@@ -40,10 +40,15 @@ public class AsterismPathRenderer : MonoBehaviour
     {
         print("HUUUU");
         singlePathRenderers.ForEach(line=>line.gameObject.SetActive(false));
-        singlePathRenderers.ForEach(Destroy);
 
-        var lineRenderer = Instantiate(singlePathRendererPrefab);
-        lineRenderer.DrawPolygon(points);
+        foreach (var asterismSinglePathRenderer in singlePathRenderers)
+        {
+            Destroy(asterismSinglePathRenderer.gameObject);
+        }
+        
+       singlePathRenderers.Add(Instantiate(singlePathRendererPrefab,transform));
+       singlePathRenderers.Last().DrawPolygon(points);
+       
     }
 
     public void Resett()
@@ -52,7 +57,7 @@ public class AsterismPathRenderer : MonoBehaviour
     }
 
     //private void Start() => DrawTestLine();
-    private void Start() => Invoke(nameof(DrawWholePath), 10f);
+    //private void Start() => Invoke(nameof(DrawWholePath), 10f);
 
     private void DrawTestLine()
     {

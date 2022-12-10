@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     //private Camera _camera;
     private float _initIntensity = 0f;
     private float _initSize = 0f;
-    private Vector3 _initPosition;
+    private Vector3 _initPosition; 
 
     private bool _isFocusing;
     private bool _isChangeIntensity;
