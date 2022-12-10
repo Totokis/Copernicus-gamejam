@@ -11,5 +11,7 @@ public class HexNode : MonoBehaviour
     public HexNode down;
     public HexNode downRight;
     public HexNode downLeft;
-    
+
+
+    public Boolean IsVisited;
 }

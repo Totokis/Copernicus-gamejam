@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class HexGridGenerator : MonoBehaviour
 {
+    public Vector2 StartNodePosition = new Vector2(4.5f, 2.2375f);
+    public HexNode StartNode;
 
     public GameObject mapParent;
     public int rows;
@@ -14,7 +17,9 @@ public class HexGridGenerator : MonoBehaviour
     public HexNode prefab;
     public GameObject leftUp;
     public HexNode[][] hexGrid;
-    
+
+    public Player objPlayerPrefab;
+
     private readonly float _upDownOffset = 0.3125f;
     private readonly float _zigZagNeighbourXOffset = 0.5f;
     private readonly float _zigZagOffset = 0.375f;
@@ -124,7 +129,13 @@ public class HexGridGenerator : MonoBehaviour
             }
         }
 
+        StartNode = allNodes.First(n => n.transform.position.x == StartNodePosition.x && n.transform.position.y == StartNodePosition.y);
+        GameObject player = Instantiate(objPlayerPrefab, mapParent.transform).gameObject;
+        player.transform.position = StartNodePosition;
+        player.GetComponent<Player>().CurrentNode = StartNode;
+
         mapParent.transform.position = mapPosition;
+
 
     }
 }
