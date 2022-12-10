@@ -1,3 +1,4 @@
+using Game.Core.Rendering;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,17 +26,21 @@ public class AsterismPathRenderer : MonoBehaviour
         }
     }
 
-    public void DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB, Color? col = null)
+    public void RemoveFromBadMove(AsterismSinglePathRenderer toremove) => singlePathRenderers.Remove(toremove);
+
+    public (MultiLineRenderer2D lr,  AsterismSinglePathRenderer ar) DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB, Color? col = null)
     {
-        var added = Instantiate(singlePathRendererPrefab, transform);
+        AsterismSinglePathRenderer added = Instantiate(singlePathRendererPrefab, transform);
         
         singlePathRenderers.Add(added);
-        singlePathRenderers.Last().DrawLine(pointA, pointB, col);
+        var lr = singlePathRenderers.Last().DrawLine(pointA, pointB, col);
         if (points.Count == 0)
         {
             points.Add(pointA);
         }
         points.Add(pointB);
+
+        return (lr, added);
     }
 
     public void DrawWholePath()

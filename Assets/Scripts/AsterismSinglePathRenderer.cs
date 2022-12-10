@@ -18,7 +18,7 @@ public class AsterismSinglePathRenderer: MonoBehaviour
         _mainCamera = Camera.main;
         lineRenderer.CurrentCamera = _mainCamera;
     }
-    public void DrawLine(Vector3 a, Vector3 b, Color? col = null)
+    public MultiLineRenderer2D DrawLine(Vector3 a, Vector3 b, Color? col = null)
     {
         if (col == null)
             col = Color.white;
@@ -26,7 +26,6 @@ public class AsterismSinglePathRenderer: MonoBehaviour
         if(col == Color.black)
         {
             lineRenderer.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
-            
         }
 
         lineRenderer.SetColor(col.Value);
@@ -36,6 +35,8 @@ public class AsterismSinglePathRenderer: MonoBehaviour
         };
         
         StartCoroutine(AnimateLine());
+
+        return lineRenderer;
     }
     private IEnumerator AnimateLine()
     {

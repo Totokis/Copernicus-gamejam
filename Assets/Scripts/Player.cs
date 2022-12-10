@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public HexNode CurrentNode;
     private HexNode _lastStaringNode;
 
+    public AudioSource BADSound;
+
     public PlayerPossibleMovesRenderer PlayerPossibleMovesRenderer;
     // Start is called before the first frame update
     void Awake()
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
         LeanTween.scale(gameObject, new Vector3(1.2f, 1.2f), 0.5f)
             .setLoopPingPong();
 
-       
+
     }
 
     public void InjectStartNode(HexNode startNode)
@@ -34,7 +36,7 @@ public class Player : MonoBehaviour
         PlayerPossibleMovesRenderer.ShowPossibleMoves(startNode, true);
     }
 
-     Single RotationSpeed = 2f;
+    Single RotationSpeed = 2f;
     void Update()
     {
         transform.localEulerAngles = new Vector3(0f, 0f, transform.localEulerAngles.z + RotationSpeed);
@@ -43,6 +45,9 @@ public class Player : MonoBehaviour
 
         var nodeBefore = CurrentNode;
         Vector2 fromLinePos = CurrentNode.transform.position;
+
+        if (_banmove)
+            return;
 
         if (CurrentNode.up != null && Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -95,12 +100,13 @@ public class Player : MonoBehaviour
 
         if (moved)
         {
-            AsterismPathRenderer.Instance.DrawLineFromPointToPoint(fromLinePos, CurrentNode.transform.position);
+            (Game.Core.Rendering.MultiLineRenderer2D lr, AsterismSinglePathRenderer ar) lineJustDrawn = AsterismPathRenderer.Instance.DrawLineFromPointToPoint(fromLinePos, CurrentNode.transform.position);
 
-            PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
+            var movingToNextNodeTween = LeanTween.move(gameObject, CurrentNode.transform.position, 0.4f)
+                .setEaseOutSine()
+                .pause();
+            movingToNextNodeTween.resume();
 
-            var desc = LeanTween.move(gameObject, CurrentNode.transform.position, 0.4f)
-                .setEaseOutSine();
             //desc.ratioPassed = 1f;
 
             //transform.position = CurrentNode.transform.position;
@@ -163,18 +169,58 @@ public class Player : MonoBehaviour
                 }
 
             }
+            
 
             if (currentAsterismCOMPLETEDDetected == currentAsterismCOMPLETESToSuccess)
                 Debug.Log("Sukces");
 
             if (!currentMoveWasInAsterismPath)
             {
-                CurrentNode = nodeBefore;
-                transform.position = CurrentNode.transform.position;
+                StartCoroutine(CancelMove(movingToNextNodeTween, nodeBefore, lineJustDrawn));
 
                 Debug.LogError("SKUCHA");
             }
+            else
+            {
+                PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
+            }
         }
+    }
+
+    private Boolean _banmove = false;
+    private IEnumerator CancelMove(LTDescr movingTween,HexNode nodeBefore,
+        (Game.Core.Rendering.MultiLineRenderer2D lr, AsterismSinglePathRenderer ar) justDrawn)
+    {
+        BADSound.Play();
+
+
+        LeanTween.value(4.7f, 5f, 0.13f)
+                .setLoopPingPong(1)
+                .setEaseInElastic()
+                //.setEaseShake()
+                .setOnUpdate((Single val) =>
+                {
+                    Camera.main.orthographicSize = val;
+                    //Camera.main.
+                });
+
+        _banmove = true;
+        StartCoroutine(UnbanMove());
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        LeanTween.cancel(movingTween.id);
+        CurrentNode.ResetProps();
+        CurrentNode = nodeBefore;
+        transform.position = CurrentNode.transform.position;
+        AsterismPathRenderer.Instance.RemoveFromBadMove(justDrawn.ar);
+        Destroy(justDrawn.ar.gameObject);
+    }
+
+    private IEnumerator UnbanMove()
+    {
+        yield return new WaitForSeconds(1f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        _banmove = false;
     }
 
     internal void ResetOnGrid()
@@ -183,7 +229,7 @@ public class Player : MonoBehaviour
         CurrentNode = _lastStaringNode;
 
         var allHexes = FindObjectsOfType<HexNode>();
-        foreach(var hex in allHexes)
+        foreach (var hex in allHexes)
         {
             hex.ResetProps();
         }
@@ -195,7 +241,7 @@ public class Player : MonoBehaviour
         }
 
         AsterismPathRenderer.Instance.Resett();
-    
+
         transform.position = _lastStaringNode.transform.position;
         PlayerPossibleMovesRenderer.Resett();
         PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
