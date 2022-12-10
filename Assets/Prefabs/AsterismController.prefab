@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &461014965
+--- !u!1 &7780713440151866593
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,30 +8,35 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 461014966}
+  - component: {fileID: 7780713440151866592}
   m_Layer: 0
-  m_Name: Map
+  m_Name: Thought
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &461014966
-Transform:
+--- !u!224 &7780713440151866592
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461014965}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 7780713440151866593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 822196949716151987}
+  m_Father: {fileID: 7780713440218736890}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &822196949716151985
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -8, y: -6}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7780713440218736891
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,50 +44,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 822196949716151987}
-  - component: {fileID: 822196949716151986}
+  - component: {fileID: 7780713440218736890}
+  - component: {fileID: 7780713440218736893}
   m_Layer: 0
-  m_Name: HexGridGenerator
+  m_Name: AsterismController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &822196949716151987
+--- !u!4 &7780713440218736890
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822196949716151985}
+  m_GameObject: {fileID: 7780713440218736891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 461014966}
+  - {fileID: 7780713440151866592}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &822196949716151986
+--- !u!114 &7780713440218736893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822196949716151985}
+  m_GameObject: {fileID: 7780713440218736891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c890c47ef66840bcb13c20e9df83d39, type: 3}
+  m_Script: {fileID: 11500000, guid: 919d520c545cf5943aef1fe94958e74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartNodePosition: {x: 4.5, y: 2.2375}
-  StartNode: {fileID: 0}
-  trCurrentMapTransform: {fileID: 0}
-  rows: 5
-  columns: 7
-  hexSprite: {fileID: 7054556046955281343, guid: 28ac8f4193f3147d98ee2e2c85a98ceb, type: 3}
-  prefab: {fileID: 3428503600137581112, guid: 034a7c997888c4bbc84e3cdd06ccce0a, type: 3}
-  leftUp: {fileID: 0}
-  objPlayerPrefab: {fileID: 965928935234555287, guid: 9729056d2f7a2964aa3905b4cbcfc7f9, type: 3}
-  MapPosition: {x: -5, y: -2, z: 0}
+  trThoughtParent: {fileID: 7780713440151866592}

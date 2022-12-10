@@ -16,7 +16,13 @@ public class Player : MonoBehaviour
     void Awake()
     {
         PlayerPossibleMovesRenderer = GetComponent<PlayerPossibleMovesRenderer>();
-    }        
+    }
+
+    private void Start()
+    {
+        LeanTween.scale(gameObject, new Vector3(1.2f, 1.2f), 0.5f)
+            .setLoopPingPong();
+    }
 
     public void InjectStartNode(HexNode startNode)
     {
