@@ -43,6 +43,7 @@ Shader "Game/S_BresenhamMultiLineRenderer2D"
         Cull Off
         //ZTest LEqual
         ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -141,7 +142,6 @@ Shader "Game/S_BresenhamMultiLineRenderer2D"
                 if (_IsUnlit == 0.0f)
                 {
                     // Lighting
-                  // Lighting
                      SurfaceData2D surfaceData;
                      InputData2D inputData;
                      surfaceData.albedo = finalColor.rgb;
