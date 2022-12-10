@@ -36,7 +36,7 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
         Single cornerXOffset = 0.75f;
         Single cornerYOffset = 0.4f;
         Single upDownOffsetY = 0.8f;
-
+         
 
         if (currentNode.up)
         {
