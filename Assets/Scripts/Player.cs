@@ -29,16 +29,19 @@ public class Player : MonoBehaviour
     {
         Boolean moved = false;
         MoveDirection? movedFromDir = null;
+
+        Vector2 fromLinePos = CurrentNode.transform.position;
+
         if (CurrentNode.up != null && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.Up);
+            CurrentNode.AddVisit(MoveDirection.Up);
             movedFromDir = MoveDirection.Down;
             CurrentNode = CurrentNode.up;
             moved = true;
         }
         else if (CurrentNode.down != null && Input.GetKeyDown(KeyCode.DownArrow))
         {
-            CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.Down);
+            CurrentNode.AddVisit(MoveDirection.Down);
             movedFromDir = MoveDirection.Up;
             CurrentNode = CurrentNode.down;
             moved = true;
@@ -48,13 +51,13 @@ public class Player : MonoBehaviour
         {
             if (CurrentNode.downLeft)
             {
-                CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.LeftDown);
+                CurrentNode.AddVisit(MoveDirection.LeftDown);
                 CurrentNode = CurrentNode.downLeft;
                 movedFromDir = MoveDirection.RightUp;
             }
             else if (CurrentNode.upLeft)
             {
-                CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.LeftUp);
+                CurrentNode.AddVisit(MoveDirection.LeftUp);
                 CurrentNode = CurrentNode.upLeft;
                 movedFromDir = MoveDirection.RightDown;
             }
@@ -65,13 +68,13 @@ public class Player : MonoBehaviour
         {
             if (CurrentNode.downRight)
             {
-                CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.RightDown);
+                CurrentNode.AddVisit(MoveDirection.RightDown);
                 CurrentNode = CurrentNode.downRight;
                 movedFromDir = MoveDirection.LeftUp;
             }
             else if (CurrentNode.upRight)
             {
-                CurrentNode.VisitsFromWhereDirections.Add(MoveDirection.RightUp);
+                CurrentNode.AddVisit(MoveDirection.RightUp);
                 CurrentNode = CurrentNode.upRight;
                 movedFromDir = MoveDirection.LeftDown;
             }
@@ -80,6 +83,8 @@ public class Player : MonoBehaviour
 
         if (moved)
         {
+            AsterismPathRenderer.Instance.DrawLineFromPointToPoint(fromLinePos, CurrentNode.transform.position);
+
             PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
 
             var desc = LeanTween.move(gameObject, CurrentNode.transform.position, 0.4f)
@@ -94,7 +99,7 @@ public class Player : MonoBehaviour
             Int32 currentAsterismCOMPLETESToSuccess = AsterismController.Instance.CurrentAsterism.Count;
             Int32 currentAsterismCOMPLETEDDetected = 0;
 
-            CurrentNode.VisitsFromWhereDirections.Add(movedFromDir.Value);
+            CurrentNode.AddVisit(movedFromDir.Value);
 
             foreach (var move in AsterismController.Instance.CurrentAsterism)
             {
@@ -135,7 +140,7 @@ public class Player : MonoBehaviour
                     allNeedsSatisfied = false;
 
                 if (allNeedsSatisfied)
-                    currentNodeChecking.IsCompleted = allNeedsSatisfied;
+                    currentNodeChecking.SetAsCompleted();
 
                 if (currentNodeChecking.IsCompleted)
                     currentAsterismCOMPLETEDDetected++;
