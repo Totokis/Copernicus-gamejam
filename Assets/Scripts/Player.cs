@@ -191,6 +191,7 @@ public class Player : MonoBehaviour
         AsterismPathRenderer.Instance.Resett();
     
         transform.position = _lastStaringNode.transform.position;
+        PlayerPossibleMovesRenderer.Resett();
         PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
     }
 }

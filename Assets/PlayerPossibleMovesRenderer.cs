@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerPossibleMovesRenderer : MonoBehaviour
@@ -157,6 +158,39 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
         {
             Destroy(left);
             left = null;
+        }
+    }
+
+    internal void Resett()
+    {
+        if (right)
+        {
+            Destroy(right);
+            right = null;
+        }
+
+        if (up)
+        {
+            Destroy(up);
+            up = null;
+        }
+
+        if (down)
+        {
+            Destroy(down);
+            down = null;
+        }
+
+        if (left)
+        {
+            Destroy(left);
+            left = null;
+        }
+
+        var arrowsleft = FindObjectsOfType<MovementTipArrow>().ToArray();
+        foreach(var arr in arrowsleft)
+        {
+            Destroy(arr);
         }
     }
 
