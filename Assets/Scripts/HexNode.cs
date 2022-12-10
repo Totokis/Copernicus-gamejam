@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HexNode : MonoBehaviour
@@ -14,6 +15,13 @@ public class HexNode : MonoBehaviour
 
     public Boolean IsCompleted;
     public List<MoveDirection> VisitsFromWhereDirections;
+
+    void Start()
+    {
+        VisitsFromWhereDirections = new List<MoveDirection>();
+
+        GetComponent<SpriteRenderer>().color = Color.HSVToRGB(51f / 360f, UnityEngine.Random.Range(21f, 46f) / 100f, 1f);
+    }
 
     public void AddVisit(MoveDirection visit)
     {
@@ -35,8 +43,4 @@ public class HexNode : MonoBehaviour
         IsCompleted = true;
     }
 
-    private void Start()
-    {
-        VisitsFromWhereDirections = new List<MoveDirection>();
-    }
 }

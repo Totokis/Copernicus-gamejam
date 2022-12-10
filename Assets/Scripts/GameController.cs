@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
         //_camera = _cameraObject.GetComponent<Camera>();
         _initIntensity = _globalLight.intensity;
         //_initSize = _camera.orthographicSize;
-       // _initPosition = _camera.transform.position;
+        // _initPosition = _camera.transform.position;
+        _isLevel = true;
     }
     void Update()
     {
