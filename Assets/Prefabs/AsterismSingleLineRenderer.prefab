@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_S_MultiLine
       objectReference: {fileID: 0}
+    - target: {fileID: 6781811110391421473, guid: fe0c5c2471ed11749a28c083dcf1cf32, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7503196689741130756, guid: fe0c5c2471ed11749a28c083dcf1cf32, type: 3}
       propertyPath: m_LineColor.b
       value: 1
