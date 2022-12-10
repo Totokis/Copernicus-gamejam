@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: bgObject
+    uniqueID: 1974930179
+    locked: 0
+  - name: Kopernikus
+    uniqueID: 1390322449
+    locked: 0
