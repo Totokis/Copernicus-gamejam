@@ -69,13 +69,30 @@ public class AsterismController : MonoBehaviour
             new AsterismPathInfo(MoveDirection.RightDown, new List<MoveDirection>(){ MoveDirection.LeftUp}),
         },
 
+        new List<AsterismPathInfo>()
+        {
+            new AsterismPathInfo(MoveDirection.LeftUp, new List<MoveDirection>(){ MoveDirection.RightDown, MoveDirection.Up}),
+            new AsterismPathInfo(MoveDirection.Up, new List<MoveDirection>(){ MoveDirection.Down}),
+            new AsterismPathInfo(MoveDirection.Down, new List<MoveDirection>(){ MoveDirection.RightDown, MoveDirection.Up}),
+            new AsterismPathInfo(MoveDirection.RightDown, new List<MoveDirection>(){ MoveDirection.LeftUp, MoveDirection.RightUp, MoveDirection.Down}),
+            //znowu pocz
+            new AsterismPathInfo(MoveDirection.Down, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.LeftDown, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.Down, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.LeftDown, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.LeftUp, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.LeftDown, new List<MoveDirection>(){ }),
+            new AsterismPathInfo(MoveDirection.LeftUp, new List<MoveDirection>(){ }),
+
+        },
+
     };
 
     public List<AsterismPathInfo> CurrentAsterism;
 
     void Start()
     {
-        CurrentAsterism = asterisms[0];
+        CurrentAsterism = asterisms[3];
 
         HexGridGenerator.Instance.SpawnMapAt(trThoughtParent.position, trThoughtParent, true);
     }
