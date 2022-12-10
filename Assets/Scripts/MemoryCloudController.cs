@@ -20,7 +20,7 @@ public class MemoryCloudController : MonoBehaviour
     }
     private void _funShowCloud1()
     {
-        if(!GlobalVariables.isLevel && !_isShow)
+        if(!GlobalVariables.isLevel && !_isShow && !GlobalVariables.isKopperChatting)
         {
             _isShow = true;
             Cloud1.SetActive(true);

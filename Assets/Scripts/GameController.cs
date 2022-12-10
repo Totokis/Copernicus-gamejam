@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     //[SerializeField] private GameObject _cameraObject;
     [SerializeField] private bool _isLevel = false;
     [SerializeField] private bool _isKopperChatting = true;
+    [SerializeField] private bool _isKopperSlidingToScreen = false;
 
 
     //private Camera _camera;
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
     {
         GlobalVariables.isLevel = _isLevel;
         GlobalVariables.isKopperChatting = _isKopperChatting;
+        GlobalVariables.isKopperSlidingToScreen = _isKopperSlidingToScreen;
 
         _funSetGroundBrightness();
     }
