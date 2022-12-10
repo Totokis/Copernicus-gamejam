@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class AsterismPathRenderer : MonoBehaviour
 {
-    
+
     [SerializeField] private AsterismSinglePathRenderer singlePathRendererPrefab;
     private List<AsterismSinglePathRenderer> singlePathRenderers = new();
     public static AsterismPathRenderer Instance;
-    [SerializeField] private List<Vector2> points= new();
+    [SerializeField] private List<Vector2> points = new();
 
 
     private void Awake()
@@ -25,10 +25,12 @@ public class AsterismPathRenderer : MonoBehaviour
         }
     }
 
-    public void DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB)
+    public void DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB, Color? col = null)
     {
-        singlePathRenderers.Add(Instantiate(singlePathRendererPrefab,transform));
-        singlePathRenderers.Last().DrawLine(pointA,pointB);
+        var added = Instantiate(singlePathRendererPrefab, transform);
+        
+        singlePathRenderers.Add(added);
+        singlePathRenderers.Last().DrawLine(pointA, pointB, col);
         if (points.Count == 0)
         {
             points.Add(pointA);
@@ -39,7 +41,7 @@ public class AsterismPathRenderer : MonoBehaviour
     public void DrawWholePath()
     {
         print("HUUUU");
-        singlePathRenderers.ForEach(line=>line.gameObject.SetActive(false));
+        singlePathRenderers.ForEach(line => line.gameObject.SetActive(false));
         singlePathRenderers.ForEach(Destroy);
 
         var lineRenderer = Instantiate(singlePathRendererPrefab);
@@ -56,8 +58,8 @@ public class AsterismPathRenderer : MonoBehaviour
 
     private void DrawTestLine()
     {
-        DrawLineFromPointToPoint(Vector3.zero, new Vector3(1,0,0));
-        DrawLineFromPointToPoint(new Vector3(1,0,0),new Vector3(2,2,0) );
-        DrawLineFromPointToPoint(new Vector3(2,2,0), new Vector3(3,4,0));
+        DrawLineFromPointToPoint(Vector3.zero, new Vector3(1, 0, 0));
+        DrawLineFromPointToPoint(new Vector3(1, 0, 0), new Vector3(2, 2, 0));
+        DrawLineFromPointToPoint(new Vector3(2, 2, 0), new Vector3(3, 4, 0));
     }
 }

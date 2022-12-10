@@ -43,6 +43,7 @@ public class HexGridGenerator : MonoBehaviour
 
     public void SpawnMapAt(Vector3 mapPos, Transform mapParentLocal, Boolean isThought)
     {
+        List<GameObject> allHexesThisGeneration = new List<GameObject>();
         for (int i = 1; i <= columns; i++)
         {
             for (int j = 1; j <= rows; j++)
@@ -53,10 +54,11 @@ public class HexGridGenerator : MonoBehaviour
                     if (j == rows && i == 1)
                     {
                         leftUp = Instantiate(hexSprite, new Vector3(i + 0.5f, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal);
+                        allHexesThisGeneration.Add(leftUp);
                     }
                     else
                     {
-                        Instantiate(hexSprite, new Vector3(i + 0.5f, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal);
+                        allHexesThisGeneration.Add(Instantiate(hexSprite, new Vector3(i + 0.5f, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal));
                     }
                 }
                 else
@@ -64,10 +66,11 @@ public class HexGridGenerator : MonoBehaviour
                     if (j == rows && i == 1)
                     {
                         leftUp = Instantiate(hexSprite, new Vector3(i, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal);
+                        allHexesThisGeneration.Add(leftUp);
                     }
                     else
                     {
-                        Instantiate(hexSprite, new Vector3(i, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal);
+                        allHexesThisGeneration.Add(Instantiate(hexSprite, new Vector3(i, j - (j * 0.315f), 0), Quaternion.identity, mapParentLocal));
                     }
 
                 }
@@ -102,8 +105,19 @@ public class HexGridGenerator : MonoBehaviour
             currentLeftPosition.x = leftUp.transform.position.x - 0.5f;
         }
 
-
+        Color c = Color.gray;
+        c.a = 0.45f;
         var allNodes = FindObjectsOfType<HexNode>();
+        if (isThought)
+        {
+            foreach (var node in allHexesThisGeneration)
+            {
+                node.GetComponent<SpriteRenderer>().color = c;
+                node.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                node.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
+            }
+        }
+
         foreach (var hexNode in allNodes)
         {
             var up = allNodes.FirstOrDefault(n => n.transform.position.x == hexNode.transform.position.x && n.transform.position.y == hexNode.transform.position.y + 2 * _halfOfSide);
@@ -161,7 +175,8 @@ public class HexGridGenerator : MonoBehaviour
             var startNode = allNodes.First(n => n.transform.localPosition.x == THOUGHTStartNodePosition.x
                 && n.transform.localPosition.y == THOUGHTStartNodePosition.y);
 
-            mapParentLocal.transform.position += mapParentLocal.transform.position;
+            //mapParentLocal.transform.position += mapParentLocal.transform.position;
+            mapParentLocal.transform.position = mapPos - new Vector3(12f, 7.8f);
 
             MarkThoughtPaths(startNode);
         }
@@ -173,6 +188,7 @@ public class HexGridGenerator : MonoBehaviour
     {
         HexNode currentNodeChecking = startNode;
         currentNodeChecking.IsRainbow = true;
+        currentNodeChecking.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
 
         currentNodeChecking.transform.localScale = Vector3.one;
         Vector3 lastNodePos = currentNodeChecking.transform.position;
@@ -201,7 +217,9 @@ public class HexGridGenerator : MonoBehaviour
                     break;
             }
 
-            AsterismPathRenderer.Instance.DrawLineFromPointToPoint(lastNodePos, currentNodeChecking.transform.position);
+            currentNodeChecking.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
+            currentNodeChecking.colorrrr = Color.black;
+            AsterismPathRenderer.Instance.DrawLineFromPointToPoint(lastNodePos, currentNodeChecking.transform.position, Color.black);
             lastNodePos = currentNodeChecking.transform.position;
 
             currentNodeChecking.transform.localScale = Vector3.one;

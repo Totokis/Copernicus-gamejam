@@ -5,6 +5,7 @@ using UnityEngine;
 public class AsterismController : MonoBehaviour
 {
     public static AsterismController Instance;
+    public Transform trInstructionPopup;
 
     public Transform trThoughtParent;
 
@@ -92,9 +93,9 @@ public class AsterismController : MonoBehaviour
 
     void Start()
     {
-        CurrentAsterism = asterisms[3];
+        CurrentAsterism = asterisms[0];
 
-        HexGridGenerator.Instance.SpawnMapAt(trThoughtParent.position, trThoughtParent, true);
+        HexGridGenerator.Instance.SpawnMapAt(trInstructionPopup.position, trThoughtParent, true);
     }
 
     // Update is called once per frame

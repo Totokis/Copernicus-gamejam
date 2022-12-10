@@ -68,9 +68,13 @@ public class HexNode : MonoBehaviour
 
     public Boolean IsRainbow = false;
     private SpriteRenderer rend;
+    internal Color? colorrrr;
+
     private void Update()
     {
         if(IsRainbow)
             rend.material.SetColor("_Color", Color.HSVToRGB(Mathf.PingPong(Time.time * 1.5f, 1), 1, 1));
+        else if (colorrrr.HasValue)
+            rend.color = colorrrr.Value; 
     }
 }

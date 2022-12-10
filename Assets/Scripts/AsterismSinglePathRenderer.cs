@@ -18,8 +18,18 @@ public class AsterismSinglePathRenderer: MonoBehaviour
         _mainCamera = Camera.main;
         lineRenderer.CurrentCamera = _mainCamera;
     }
-    public void DrawLine(Vector3 a, Vector3 b)
+    public void DrawLine(Vector3 a, Vector3 b, Color? col = null)
     {
+        if (col == null)
+            col = Color.white;
+
+        if(col == Color.black)
+        {
+            lineRenderer.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
+            
+        }
+
+        lineRenderer.SetColor(col.Value);
         lineRenderer.Points = new List<Vector2>
         {
             a,b

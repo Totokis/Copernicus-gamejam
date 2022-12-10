@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         Boolean moved = false;
         MoveDirection? movedFromDir = null;
 
+        var nodeBefore = CurrentNode;
         Vector2 fromLinePos = CurrentNode.transform.position;
 
         if (CurrentNode.up != null && Input.GetKeyDown(KeyCode.UpArrow))
@@ -167,7 +168,12 @@ public class Player : MonoBehaviour
                 Debug.Log("Sukces");
 
             if (!currentMoveWasInAsterismPath)
+            {
+                CurrentNode = nodeBefore;
+                transform.position = CurrentNode.transform.position;
+
                 Debug.LogError("SKUCHA");
+            }
         }
     }
 
