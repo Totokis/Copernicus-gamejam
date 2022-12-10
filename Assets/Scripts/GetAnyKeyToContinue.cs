@@ -1,17 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
-public class ResetPlayer : MonoBehaviour
+public class GetAnyKeyToContinue : MonoBehaviour
 {
     private Boolean _listening = false;
     public CanvasGroup cg;
 
+    private void Awake()
+    {
+        cg.alpha = 0f;
+    }
     private void Start()
     {
         _listening = true;
+    }
+
+    private void OnEnable()
+    {
+        Activate();
     }
 
     public void Activate()
@@ -33,15 +39,20 @@ public class ResetPlayer : MonoBehaviour
             .setOnUpdate((Single val) =>
             {
                 cg.alpha = val;
+            }).setOnComplete(() =>
+            {
+                gameObject.SetActive(false);        
             });
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_listening && Input.GetKeyDown(KeyCode.R))
+        if (_listening && Input.anyKeyDown)
         {
-            FindObjectOfType<Player>().ResetOnGrid();
+            StateController.Instance.KeyPressed();
         }
     }
 }

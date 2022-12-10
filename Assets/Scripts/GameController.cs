@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private bool _isLevel = false;
     [SerializeField] private bool _isKopperChatting = true;
     [SerializeField] private bool _isKopperSlidingToScreen = false;
+    [SerializeField] private bool _isLogoShow = false;
 
 
     //private Camera _camera;
@@ -20,10 +21,10 @@ public class GameController : MonoBehaviour
 
     private bool _isFocusing;
     private bool _isChangeIntensity;
+    
 
     void Start()
     {
-        _isLevel = true;
         _initIntensity = _globalLight.intensity;
     }
     void Update()
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour
         GlobalVariables.isLevel = _isLevel;
         GlobalVariables.isKopperChatting = _isKopperChatting;
         GlobalVariables.isKopperSlidingToScreen = _isKopperSlidingToScreen;
+        GlobalVariables.isLogoOnScreen = _isLogoShow;
 
         _funSetGroundBrightness();
     }
@@ -53,5 +55,22 @@ public class GameController : MonoBehaviour
                 _globalLight.intensity = value;
             });
         }
+    }
+
+    public void ActivateKopperComing()
+    {
+        _isKopperSlidingToScreen = true;
+    }
+    public void DeactivateKopperChatting()
+    {
+        _isKopperChatting = false;
+    }
+    public void DeactivateLevel()
+    {
+        _isLevel = false;
+    }
+    public void ActivateLevel()
+    {
+        _isLevel = true;
     }
 }
