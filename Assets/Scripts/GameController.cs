@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Light2D _globalLight;
     //[SerializeField] private GameObject _cameraObject;
     [SerializeField] private bool _isLevel = false;
+    [SerializeField] private bool _isKopperChatting = true;
+
 
     //private Camera _camera;
     private float _initIntensity = 0f;
@@ -20,16 +22,15 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        //_camera = _cameraObject.GetComponent<Camera>();
+
         _initIntensity = _globalLight.intensity;
-        //_initSize = _camera.orthographicSize;
-       // _initPosition = _camera.transform.position;
     }
     void Update()
     {
         GlobalVariables.isLevel = _isLevel;
+        GlobalVariables.isKopperChatting = _isKopperChatting;
+
         _funSetGroundBrightness();
-       // _funFocusCameraOnLvl(4.7f, 1.5f);
     }
 
     private void _funSetGroundBrightness()
@@ -51,26 +52,4 @@ public class GameController : MonoBehaviour
             });
         }
     }
-
-    //private void _funFocusCameraOnLvl(float zoom, float time)
-    //{
-    //    if (GlobalVariables.isLevel && !_isFocusing)
-    //    {
-    //        _isFocusing = true;
-    //        LeanTween.moveLocalY(_cameraObject, 1f, time).setEaseOutSine();
-    //        LeanTween.value(_initSize, zoom, time).setOnUpdate((value) =>
-    //        {
-    //            _camera.orthographicSize = value;
-    //        });
-    //    }
-    //    else if (!GlobalVariables.isLevel && _isFocusing)
-    //    {
-    //        _isFocusing = false;
-    //        LeanTween.moveLocalY(_cameraObject, _initPosition.y, time).setEaseOutSine();
-    //        LeanTween.value(zoom, _initSize, time).setOnUpdate((value) =>
-    //        {
-    //            _camera.orthographicSize = value;
-    //        });
-    //    }
-    //}
 }
