@@ -29,7 +29,7 @@ public class MemoryCloudController : MonoBehaviour
         else if(GlobalVariables.isLevel && _isShow)
         {
             _isShow = false;
-            LeanTween.scale(Cloud3, new Vector3(0f, 0f), 0.7f).setEaseInSine().setOnComplete(_funHideCloud2);
+            LeanTween.scale(Cloud3, new Vector3(0f, 0f), 0.3f).setEaseInSine().setOnComplete(_funHideCloud2);
         }
     }
     private void _funShowCloud2()
@@ -39,7 +39,7 @@ public class MemoryCloudController : MonoBehaviour
     }
     private void _funHideCloud2()
     {
-        LeanTween.scale(Cloud2, new Vector3(0f, 0f), 0.7f).setEaseInSine().setOnComplete(_funHideCloud3);
+        LeanTween.scale(Cloud2, new Vector3(0f, 0f), 0.2f).setEaseInSine().setOnComplete(_funHideCloud3);
     }
 
     private void _funShowCloud3()
@@ -49,7 +49,7 @@ public class MemoryCloudController : MonoBehaviour
     }
     private void _funHideCloud3()
     {
-        LeanTween.scale(Cloud1, new Vector3(0f, 0f), 0.7f).setEaseInSine();
+        LeanTween.scale(Cloud1, new Vector3(0f, 0f), 0.2f).setEaseInSine();
         Cloud1.SetActive(false);
         Cloud2.SetActive(false);
         Cloud3.SetActive(false);
