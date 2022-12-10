@@ -25,9 +25,9 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
         if (!movebyMapOffset)
             mapOffset = Vector3.zero;
 
-        Single cornerXOffset = 0.25f;
-        Single cornerYOffset = 0.2f;
-        Single upDownOffsetY = 0.35f;
+        Single cornerXOffset = 0.75f;
+        Single cornerYOffset = 0.4f;
+        Single upDownOffsetY = 0.8f;
 
 
         if (currentNode.up)
