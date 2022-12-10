@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -10,10 +11,17 @@ public class Player : MonoBehaviour
 {
     public HexNode CurrentNode;
 
+    public PlayerPossibleMovesRenderer PlayerPossibleMovesRenderer;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        PlayerPossibleMovesRenderer = GetComponent<PlayerPossibleMovesRenderer>();
+    }        
 
+    public void InjectStartNode(HexNode startNode)
+    {
+        CurrentNode = startNode;
+        PlayerPossibleMovesRenderer.ShowPossibleMoves(startNode, true);
     }
 
     // Update is called once per frame
@@ -72,6 +80,8 @@ public class Player : MonoBehaviour
 
         if (moved)
         {
+            PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
+
             var desc = LeanTween.move(gameObject, CurrentNode.transform.position, 0.4f)
                 .setEaseOutSine();
             //desc.ratioPassed = 1f;

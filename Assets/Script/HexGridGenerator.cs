@@ -34,11 +34,11 @@ public class HexGridGenerator : MonoBehaviour
 
     public Player objPlayerPrefab;
 
-    private readonly float _upDownOffset = 0.3125f;
-    private readonly float _zigZagNeighbourXOffset = 0.5f;
+    public readonly float _upDownOffset = 0.3125f;
+    public readonly float _zigZagNeighbourXOffset = 0.5f;
     private readonly float _zigZagOffset = 0.375f;
     private readonly float _halfOfSide = 0.1875f;
-    [SerializeField] private Vector3 mapPosition = new(-4, -2);
+    public Vector3 MapPosition = new(-4, -2);
 
     private void Start()
     {
@@ -147,9 +147,9 @@ public class HexGridGenerator : MonoBehaviour
         //StartNode.IsVisited = true;
         GameObject player = Instantiate(objPlayerPrefab, mapParent.transform).gameObject;
         player.transform.position = StartNodePosition;
-        player.GetComponent<Player>().CurrentNode = StartNode;
+        player.GetComponent<Player>().InjectStartNode(StartNode);
 
-        mapParent.transform.position = mapPosition;
+        mapParent.transform.position = MapPosition;
 
 
     }
