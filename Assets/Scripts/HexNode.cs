@@ -16,12 +16,20 @@ public class HexNode : MonoBehaviour
     public Boolean IsCompleted;
     public List<MoveDirection> VisitsFromWhereDirections;
 
+    public void ResetProps()
+    {
+        IsCompleted = false;
+        VisitsFromWhereDirections.Clear();
+        LeanTween.cancel(gameObject);
+        LeanTween.scale(gameObject, Vector3.zero, 0.3f);
+    }
+
     void Start()
     {
         VisitsFromWhereDirections = new List<MoveDirection>();
+        rend = GetComponent<SpriteRenderer>();
 
         GetComponent<SpriteRenderer>().color = Color.HSVToRGB(51f / 360f, UnityEngine.Random.Range(21f, 46f) / 100f, 1f);
-
     }
 
     private void EffectOnAppearing()
@@ -58,4 +66,11 @@ public class HexNode : MonoBehaviour
         IsCompleted = true;
     }
 
+    public Boolean IsRainbow = false;
+    private SpriteRenderer rend;
+    private void Update()
+    {
+        if(IsRainbow)
+            rend.material.SetColor("_Color", Color.HSVToRGB(Mathf.PingPong(Time.time * 1.5f, 1), 1, 1));
+    }
 }

@@ -16,7 +16,7 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
     private GameObject up;
     private GameObject down;
 
-    public void ShowPossibleMoves(HexNode currentNode, Boolean movebyMapOffset)
+    public void ShowPossibleMoves(HexNode currentNode, Boolean movebyMapOffset = false)
     {
         //if (Rendered.Count > 0)
         //{

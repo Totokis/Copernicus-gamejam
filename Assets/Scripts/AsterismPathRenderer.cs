@@ -10,7 +10,8 @@ public class AsterismPathRenderer : MonoBehaviour
     [SerializeField] private AsterismSinglePathRenderer singlePathRendererPrefab;
     private List<AsterismSinglePathRenderer> singlePathRenderers = new();
     public static AsterismPathRenderer Instance;
-    
+    [SerializeField] private List<Vector2> points= new();
+
 
     private void Awake()
     {
@@ -28,11 +29,30 @@ public class AsterismPathRenderer : MonoBehaviour
     {
         singlePathRenderers.Add(Instantiate(singlePathRendererPrefab,transform));
         singlePathRenderers.Last().DrawLine(pointA,pointB);
+        if (points.Count == 0)
+        {
+            points.Add(pointA);
+        }
+        points.Add(pointB);
+    }
 
+    public void DrawWholePath()
+    {
+        print("HUUUU");
+        singlePathRenderers.ForEach(line=>line.gameObject.SetActive(false));
+        singlePathRenderers.ForEach(Destroy);
+
+        var lineRenderer = Instantiate(singlePathRendererPrefab);
+        lineRenderer.DrawPolygon(points);
+    }
+
+    public void Resett()
+    {
+        singlePathRenderers.Clear();
     }
 
     //private void Start() => DrawTestLine();
-
+    //private void Start() => Invoke(nameof(DrawWholePath), 10f);
 
     private void DrawTestLine()
     {
