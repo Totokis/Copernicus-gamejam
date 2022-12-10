@@ -57,27 +57,46 @@ public class AsterismSinglePathRenderer: MonoBehaviour
     {
         lineRenderer.Points.Clear();
         lineRenderer.Points.Add(linePoints[0]);
-        var segmentDuration = wholeAnimationDuration / pointsCount;
-        for (int i = 0; i < pointsCount - 1; i++)
+        lineRenderer.Points.Add(linePoints[1]);
+        // var segmentDuration = wholeAnimationDuration / pointsCount;
+        // for (int i = 0; i < pointsCount - 1; i++)
+        // {
+        //     var startTime = Time.time;
+        //     
+        //     var startPosition = linePoints[i];
+        //     var endPosition = linePoints[i + 1];
+        //     lineRenderer.Points.Add(startPosition);
+        //
+        //     var pos = startPosition;
+        //
+        //     while (pos!=endPosition)
+        //     {
+        //         var t = (Time.time - startTime) / segmentDuration;
+        //         pos = Vector3.Lerp(startPosition, endPosition, t);
+        //
+        //         lineRenderer.Points[i+1] = pos;
+        //         lineRenderer.ApplyPointPositionChanges();
+        //         yield return null;
+        //     }    
+        //     
+        // }
+        
+        
+        var startTime = Time.time;
+
+        var startPosition = lineRenderer.Points[0];
+        var endPosition = lineRenderer.Points[1];
+
+        var pos = startPosition;
+
+        while (pos!=endPosition)
         {
-            var startTime = Time.time;
-            
-            var startPosition = linePoints[i];
-            var endPosition = linePoints[i + 1];
-            lineRenderer.Points.Add(startPosition);
+            var t = (Time.time - startTime) / animationDuration;
+            pos = Vector3.Lerp(startPosition, endPosition, t);
+            lineRenderer.Points[1] = pos;
+            lineRenderer.ApplyPointPositionChanges();
 
-            var pos = startPosition;
-
-            while (pos!=endPosition)
-            {
-                var t = (Time.time - startTime) / segmentDuration;
-                pos = Vector3.Lerp(startPosition, endPosition, t);
-
-                lineRenderer.Points[i+1] = pos;
-                lineRenderer.ApplyPointPositionChanges();
-                yield return null;
-            }    
-            
+            yield return null;
         }
         
     }

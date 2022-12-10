@@ -52,7 +52,7 @@ public class AsterismPathRenderer : MonoBehaviour
     }
 
     //private void Start() => DrawTestLine();
-    //private void Start() => Invoke(nameof(DrawWholePath), 10f);
+    private void Start() => Invoke(nameof(DrawWholePath), 10f);
 
     private void DrawTestLine()
     {
