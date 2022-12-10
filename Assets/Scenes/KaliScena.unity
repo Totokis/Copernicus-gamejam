@@ -1407,6 +1407,7 @@ MonoBehaviour:
   _globalLight: {fileID: 579557531}
   _isLevel: 0
   _isKopperChatting: 1
+  _isKopperSlidingToScreen: 0
 --- !u!1001 &862955778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2750,7 +2751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4588009793607053614, guid: 47d8bcc10bb631b4a974149d4f69a10c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.38
+      value: -6.85
       objectReference: {fileID: 0}
     - target: {fileID: 4588009793607053614, guid: 47d8bcc10bb631b4a974149d4f69a10c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2841,11 +2842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6006494589160797479, guid: 8ebfb377f515ac54eb52228aada92743, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.41
+      value: -10.71
       objectReference: {fileID: 0}
     - target: {fileID: 6006494589160797479, guid: 8ebfb377f515ac54eb52228aada92743, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.47
+      value: -6.85
       objectReference: {fileID: 0}
     - target: {fileID: 6006494589160797479, guid: 8ebfb377f515ac54eb52228aada92743, type: 3}
       propertyPath: m_LocalPosition.z
