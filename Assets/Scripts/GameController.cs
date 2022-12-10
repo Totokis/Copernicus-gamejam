@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
 
     private bool _isFocusing;
     private bool _isChangeIntensity;
+    
 
     void Start()
     {
@@ -54,5 +55,10 @@ public class GameController : MonoBehaviour
                 _globalLight.intensity = value;
             });
         }
+    }
+
+    public void ActivateKopperComing()
+    {
+        _isKopperSlidingToScreen = true;
     }
 }

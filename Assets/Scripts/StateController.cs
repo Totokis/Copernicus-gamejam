@@ -8,8 +8,22 @@ public class StateController : MonoBehaviour
     
     [SerializeField] private GameObject title;
     [SerializeField] private float showTitleAfterTime = 5f;
-    [SerializeField] private GameObject showBeginInstruction;
+    [SerializeField] private GameObject beginInstruction;
     [SerializeField] private float showBeginInstructionAfterTime = 7f;
+    [SerializeField] private GameController gameController;
+    public static StateController Instance;
+
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     private void Start()
     {
         Invoke(nameof(ShowTitle),showTitleAfterTime);
@@ -20,12 +34,19 @@ public class StateController : MonoBehaviour
     private void ShowBeginInstruction()
     {
 
-        showBeginInstruction.SetActive(true);
+        beginInstruction.SetActive(true);
     }
 
 
     private void ShowTitle()
     {
         title.SetActive(true);
+    }
+    public void KeyPressed()
+    {
+        title.GetComponent<CanvasGroupFadeController>().Desactivate();
+        beginInstruction.GetComponent<GetAnyKeyToContinue>().Desactivate();
+        
+        gameController.ActivateKopperComing();
     }
 }

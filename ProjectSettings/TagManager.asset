@@ -47,6 +47,9 @@ TagManager:
   - name: Kopernikus
     uniqueID: 1390322449
     locked: 0
+  - name: FinalCopernicus
+    uniqueID: 3908160793
+    locked: 0
   - name: GUI
     uniqueID: 3117203187
     locked: 0

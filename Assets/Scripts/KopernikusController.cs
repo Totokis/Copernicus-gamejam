@@ -11,6 +11,26 @@ public class KopernikusController : MonoBehaviour
     private bool _isRotating = false;
     private bool _isSliding = false;
     //private SpriteRenderer _srKopernicjum;
+    
+    [SerializeField] private Material litMaterial;
+    [SerializeField] private Material unlitMaterial;
+    [SerializeField] private List<SpriteRenderer> renderers;
+
+    private void ChangeKopperMaterialToUnlit()
+    {
+        foreach (var spriteRenderer in renderers)
+        {
+            spriteRenderer.material = unlitMaterial;
+        }
+    }
+    
+    private void ChangeKopperMaterialToLit()
+    {
+        foreach (var spriteRenderer in renderers)
+        {
+            spriteRenderer.material = litMaterial;
+        }
+    }
     void Start()
     {
         _anim = gameObject.GetComponent<Animation>();
@@ -39,6 +59,8 @@ public class KopernikusController : MonoBehaviour
             _isRotating = true;
             LeanTween.scaleX(_kopernicjumFront, 0, 0.4f)
                 .setOnComplete(_funDestroyObjectAndScale);
+            
+            ChangeKopperMaterialToLit();
         }
     }
     private void _funDestroyObjectAndScale()
