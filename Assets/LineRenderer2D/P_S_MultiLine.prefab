@@ -50,7 +50,7 @@ MonoBehaviour:
   - {x: 0.21, y: 0}
   m_Renderer: {fileID: 6781811110391421473}
   m_LineColor: {r: 1, g: 1, b: 1, a: 1}
-  m_LineThickness: 16
+  m_LineThickness: 8
   m_MaxPoints: 64
   m_AutoApplyPositionChanges: 1
   m_PositionsAreLocalSpace: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 816441713
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 0fcb97507efc33343adbc2783bc41de1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

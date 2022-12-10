@@ -10,6 +10,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Player : MonoBehaviour
 {
     public HexNode CurrentNode;
+    private HexNode _lastStaringNode;
 
     public PlayerPossibleMovesRenderer PlayerPossibleMovesRenderer;
     // Start is called before the first frame update
@@ -22,17 +23,21 @@ public class Player : MonoBehaviour
     {
         LeanTween.scale(gameObject, new Vector3(1.2f, 1.2f), 0.5f)
             .setLoopPingPong();
+
+       
     }
 
     public void InjectStartNode(HexNode startNode)
     {
+        _lastStaringNode = startNode;
         CurrentNode = startNode;
         PlayerPossibleMovesRenderer.ShowPossibleMoves(startNode, true);
     }
 
-    // Update is called once per frame
+     Single RotationSpeed = 2f;
     void Update()
     {
+        transform.localEulerAngles = new Vector3(0f, 0f, transform.localEulerAngles.z + RotationSpeed);
         Boolean moved = false;
         MoveDirection? movedFromDir = null;
 
@@ -164,5 +169,28 @@ public class Player : MonoBehaviour
             if (!currentMoveWasInAsterismPath)
                 Debug.LogError("SKUCHA");
         }
+    }
+
+    internal void ResetOnGrid()
+    {
+        transform.position = _lastStaringNode.transform.position;
+        CurrentNode = _lastStaringNode;
+
+        var allHexes = FindObjectsOfType<HexNode>();
+        foreach(var hex in allHexes)
+        {
+            hex.ResetProps();
+        }
+
+        var all = FindObjectsOfType<AsterismSinglePathRenderer>();
+        foreach (var line in all)
+        {
+            Destroy(line.gameObject);
+        }
+
+        AsterismPathRenderer.Instance.Resett();
+    
+        transform.position = _lastStaringNode.transform.position;
+        PlayerPossibleMovesRenderer.ShowPossibleMoves(CurrentNode, false);
     }
 }

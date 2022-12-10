@@ -31,6 +31,11 @@ public class AsterismPathRenderer : MonoBehaviour
 
     }
 
+    public void Resett()
+    {
+        singlePathRenderers.Clear();
+    }
+
     //private void Start() => DrawTestLine();
 
 

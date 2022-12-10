@@ -85,4 +85,4 @@ MonoBehaviour:
   prefab: {fileID: 3428503600137581112, guid: 034a7c997888c4bbc84e3cdd06ccce0a, type: 3}
   leftUp: {fileID: 0}
   objPlayerPrefab: {fileID: 965928935234555287, guid: 9729056d2f7a2964aa3905b4cbcfc7f9, type: 3}
-  MapPosition: {x: -5, y: -2, z: 0}
+  MapPosition: {x: -5.47, y: -2, z: 0}

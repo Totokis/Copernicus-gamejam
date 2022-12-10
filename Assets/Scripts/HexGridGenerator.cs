@@ -172,6 +172,8 @@ public class HexGridGenerator : MonoBehaviour
     private void MarkThoughtPaths(HexNode startNode)
     {
         HexNode currentNodeChecking = startNode;
+        currentNodeChecking.IsRainbow = true;
+
         currentNodeChecking.transform.localScale = Vector3.one;
         Vector3 lastNodePos = currentNodeChecking.transform.position;
 
