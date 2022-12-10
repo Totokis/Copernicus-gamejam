@@ -9,6 +9,7 @@ public class KopernikusController : MonoBehaviour
 
     private Animation _anim;
     private bool _isRotating = false;
+    private bool _isSliding = false;
     //private SpriteRenderer _srKopernicjum;
     void Start()
     {
@@ -19,6 +20,16 @@ public class KopernikusController : MonoBehaviour
         if (!_anim.isPlaying)
             _anim.Play();
         _funRotate();
+        _funSlidingToScreen();
+    }
+
+    private void _funSlidingToScreen()
+    {
+        if(GlobalVariables.isKopperSlidingToScreen && !_isSliding)
+        {
+            _isSliding = true;
+        LeanTween.moveX(_kopernicjumFront, -4.46f, 2f).setEaseInOutSine();
+        }
     }
 
     private void _funRotate()
@@ -33,7 +44,7 @@ public class KopernikusController : MonoBehaviour
     private void _funDestroyObjectAndScale()
     {
         Destroy(_kopernicjumFront);
-        gameObject.transform.localPosition = new Vector3(-4.26f, -5.38f, -2.1f);
+        gameObject.transform.localPosition = new Vector3(-4.46f, -6.85f, -2.1f);
         LeanTween.scaleX(gameObject, 1.5f, 0.4f);
     }
 }

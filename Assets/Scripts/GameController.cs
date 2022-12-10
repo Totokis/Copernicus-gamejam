@@ -10,12 +10,13 @@ public class GameController : MonoBehaviour
     //[SerializeField] private GameObject _cameraObject;
     [SerializeField] private bool _isLevel = false;
     [SerializeField] private bool _isKopperChatting = true;
+    [SerializeField] private bool _isKopperSlidingToScreen = false;
 
 
     //private Camera _camera;
     private float _initIntensity = 0f;
     private float _initSize = 0f;
-    private Vector3 _initPosition;
+    private Vector3 _initPosition; 
 
     private bool _isFocusing;
     private bool _isChangeIntensity;
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
     {
         GlobalVariables.isLevel = _isLevel;
         GlobalVariables.isKopperChatting = _isKopperChatting;
+        GlobalVariables.isKopperSlidingToScreen = _isKopperSlidingToScreen;
 
         _funSetGroundBrightness();
     }

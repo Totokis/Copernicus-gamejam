@@ -60,13 +60,19 @@ public class AsterismSinglePathRenderer: MonoBehaviour
     {
         pointsCount = points.Count;
         linePoints = points;
+        lineRenderer.Points.Clear();
+        
+        for (int i = 0; i < pointsCount; i++)
+        {
+            lineRenderer.Points.Add(Vector2.zero);
+        }
+        
         StartCoroutine(AnimatePolygon());
     }
     
     private IEnumerator AnimatePolygon()
     {
-        lineRenderer.Points.Clear();
-        lineRenderer.Points.Add(linePoints[0]);
+        
         var segmentDuration = wholeAnimationDuration / pointsCount;
         for (int i = 0; i < pointsCount - 1; i++)
         {
@@ -74,21 +80,21 @@ public class AsterismSinglePathRenderer: MonoBehaviour
             
             var startPosition = linePoints[i];
             var endPosition = linePoints[i + 1];
-            lineRenderer.Points.Add(startPosition);
 
+            lineRenderer.Points[i] = linePoints[i];
+            
             var pos = startPosition;
-
+        
             while (pos!=endPosition)
             {
                 var t = (Time.time - startTime) / segmentDuration;
                 pos = Vector3.Lerp(startPosition, endPosition, t);
-
+        
                 lineRenderer.Points[i+1] = pos;
                 lineRenderer.ApplyPointPositionChanges();
                 yield return null;
             }    
             
         }
-        
     }
 }
