@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        _isLevel = false;
         _initIntensity = _globalLight.intensity;
     }
     void Update()
