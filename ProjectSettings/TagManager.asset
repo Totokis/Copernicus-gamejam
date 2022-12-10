@@ -50,3 +50,6 @@ TagManager:
   - name: GUI
     uniqueID: 3117203187
     locked: 0
+  - name: TipArrows
+    uniqueID: 593593897
+    locked: 0

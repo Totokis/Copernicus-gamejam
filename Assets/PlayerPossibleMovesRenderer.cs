@@ -10,15 +10,23 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
     public GameObject objLeftArrow;
     public GameObject objRightArrow;
 
-    private List<GameObject> Rendered = new List<GameObject>();
+    //private List<GameObject> Rendered = new List<GameObject>();
+    private GameObject left;
+    private GameObject right;
+    private GameObject up;
+    private GameObject down;
 
     public void ShowPossibleMoves(HexNode currentNode, Boolean movebyMapOffset)
     {
-        if(Rendered.Count > 0)
-        {
-            Rendered.ForEach(r => Destroy(r));
-            Rendered.Clear();
-        }
+        //if (Rendered.Count > 0)
+        //{
+        //    Rendered.ForEach(r =>
+        //    {
+        //        LeanTween.scale(r, Vector3.zero, 0.15f)
+        //            .setOnComplete(() => Destroy(r, 0.1f));
+        //    });
+        //    Rendered.Clear();
+        //}
 
         //TZREBA PRZESUNAC O MAPE
         Vector3 mapOffset = HexGridGenerator.Instance.MapPosition;
@@ -32,53 +40,124 @@ public class PlayerPossibleMovesRenderer : MonoBehaviour
 
         if (currentNode.up)
         {
-            GameObject arrow = Instantiate(objUpArrow, currentNode.up.transform.position + new Vector3(0f, upDownOffsetY) + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
+            if (!up)
+            {
+                GameObject arrow = Instantiate(objUpArrow, currentNode.up.transform.position + new Vector3(0f, upDownOffsetY) + mapOffset, Quaternion.identity);
+                up = arrow;
+            }
+            else
+            {
+                LeanTween.move(up, currentNode.up.transform.position, 0.15f)
+                    .setEaseOutSine();
+            }
+        }
+        else
+        {
+            if (up)
+                up.GetComponent<MovementTipArrow>().DestInWhile();
+            up = null;
         }
 
         if (currentNode.down)
         {
             GameObject arrow = Instantiate(objDownArrow, currentNode.down.transform.position + new Vector3(0f, -upDownOffsetY) + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
+            down = arrow;
+            //Rendered.Add(arrow);
+        }
+        else
+        {
+            if (down)
+                down.GetComponent<MovementTipArrow>().DestInWhile();
+            down = null;
         }
 
-        if (currentNode.upRight)
+        if (currentNode.upRight || currentNode.downRight)
         {
-            GameObject arrow = Instantiate(objRightArrow, currentNode.upRight.transform.position +
-                new Vector3(cornerXOffset,
-                cornerYOffset)
-                + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
+            Vector3 targetPos;
+            if (currentNode.upRight)
+            {
+                targetPos = currentNode.upRight.transform.position +
+                    new Vector3(cornerXOffset,
+                    cornerYOffset)
+                    + mapOffset;
+            }
+            else
+            {
+                targetPos = currentNode.downRight.transform.position +
+                     new Vector3(cornerXOffset,
+                     -cornerYOffset)
+                     + mapOffset;
+            }
+
+            if (!right)
+            {
+                GameObject arrow;
+                if (currentNode.upRight)
+                {
+                    arrow = Instantiate(objRightArrow, targetPos, Quaternion.identity);
+                }
+                else
+                {
+                    arrow = Instantiate(objRightArrow, targetPos, Quaternion.identity);
+                }
+                right = arrow;
+            }
+            else
+            {
+                LeanTween.move(right, targetPos, 0.15f)
+                    .setEaseOutSine();
+            }
+            //Rendered.Add(arrow);
+        }
+        else
+        {
+            Destroy(right);
+            right = null;
         }
 
-        if (currentNode.downRight)
+        if (currentNode.upLeft || currentNode.downLeft)
         {
-            GameObject arrow = Instantiate(objRightArrow, currentNode.downRight.transform.position +
-                new Vector3(cornerXOffset,
-                -cornerYOffset)
-                + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
-        }
-
-        if (currentNode.upLeft)
-        {
-            GameObject arrow = Instantiate(objLeftArrow, currentNode.upLeft.transform.position +
+            Vector3 targetPos;
+            if (currentNode.upLeft)
+            {
+                targetPos = currentNode.upLeft.transform.position +
                 new Vector3(-cornerXOffset,
                 +cornerYOffset)
-                + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
-        }
-
-        if (currentNode.downLeft)
-        {
-            GameObject arrow = Instantiate(objLeftArrow, currentNode.downLeft.transform.position +
+                + mapOffset;
+            }
+            else
+            {
+                targetPos = currentNode.downLeft.transform.position +
                 new Vector3(-cornerXOffset,
                 -cornerYOffset)
-                + mapOffset, Quaternion.identity);
-            Rendered.Add(arrow);
+                + mapOffset;
+            }
+
+            if (!left)
+            {
+                GameObject arrow;
+                if (currentNode.upLeft)
+                {
+                    arrow = Instantiate(objLeftArrow, targetPos, Quaternion.identity);
+                }
+                else
+                {
+                    arrow = Instantiate(objLeftArrow, targetPos, Quaternion.identity);
+                }
+                left = arrow;
+            }
+            else
+            {
+                LeanTween.move(left, targetPos, 0.15f)
+                    .setEaseOutSine();
+            }
+            //Rendered.Add(arrow);
         }
-
-
+        else
+        {
+            Destroy(left);
+            left = null;
+        }
     }
 
     // Start is called before the first frame update

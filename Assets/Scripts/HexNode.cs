@@ -19,8 +19,13 @@ public class HexNode : MonoBehaviour
     {
         if (VisitsFromWhereDirections.Count == 0)
         {
-            LeanTween.scale(gameObject, Vector3.one, UnityEngine.Random.Range(0.420f, 0.69f))
-                .setEaseInOutBack();
+            LeanTween.scale(gameObject, Vector3.one, UnityEngine.Random.Range(0.70f, 0.94f))
+                .setEaseInOutBack()
+                .setOnComplete(() =>
+                {
+                    LeanTween.scale(gameObject, new Vector3(0.8f, 0.8f), UnityEngine.Random.Range(0.6f, 1.2f))
+                        .setLoopPingPong();
+                });
         }
         VisitsFromWhereDirections.Add(visit);
     }
