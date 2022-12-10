@@ -6,6 +6,8 @@ public class AsterismController : MonoBehaviour
 {
     public static AsterismController Instance;
 
+    public Transform trThoughtParent;
+
     private void Awake()
     {
         if (!Instance)
@@ -73,7 +75,9 @@ public class AsterismController : MonoBehaviour
 
     void Start()
     {
-        CurrentAsterism = asterisms[2];
+        CurrentAsterism = asterisms[0];
+
+        HexGridGenerator.Instance.SpawnMapAt(trThoughtParent.position, trThoughtParent, true);
     }
 
     // Update is called once per frame

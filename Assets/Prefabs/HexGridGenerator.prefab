@@ -78,11 +78,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartNodePosition: {x: 4.5, y: 2.2375}
   StartNode: {fileID: 0}
-  mapParent: {fileID: 461014965}
+  trCurrentMapTransform: {fileID: 0}
   rows: 5
   columns: 7
   hexSprite: {fileID: 7054556046955281343, guid: 28ac8f4193f3147d98ee2e2c85a98ceb, type: 3}
   prefab: {fileID: 3428503600137581112, guid: 034a7c997888c4bbc84e3cdd06ccce0a, type: 3}
   leftUp: {fileID: 0}
   objPlayerPrefab: {fileID: 965928935234555287, guid: 9729056d2f7a2964aa3905b4cbcfc7f9, type: 3}
-  mapPosition: {x: -4, y: -2, z: 0}
+  MapPosition: {x: -5, y: -2, z: 0}
