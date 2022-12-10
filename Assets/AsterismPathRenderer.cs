@@ -31,7 +31,9 @@ public class AsterismPathRenderer : MonoBehaviour
 
     }
 
-    
+    //private void Start() => DrawTestLine();
+
+
     private void DrawTestLine()
     {
         DrawLineFromPointToPoint(Vector3.zero, new Vector3(10,0,0));
