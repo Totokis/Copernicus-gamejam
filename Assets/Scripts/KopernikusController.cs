@@ -48,7 +48,10 @@ public class KopernikusController : MonoBehaviour
         if(GlobalVariables.isKopperSlidingToScreen && !_isSliding)
         {
             _isSliding = true;
-        LeanTween.moveX(_kopernicjumFront, -4.46f, 2f).setEaseInOutSine();
+        LeanTween.moveX(_kopernicjumFront, -4.46f, 2f).setEaseInOutSine().setOnComplete(() =>
+        {
+            StateController.Instance.ShowSpeechLines();
+        });
         }
     }
 

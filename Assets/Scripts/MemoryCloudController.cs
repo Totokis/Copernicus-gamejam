@@ -23,8 +23,8 @@ public class MemoryCloudController : MonoBehaviour
         if(!GlobalVariables.isLevel && !_isShow && !GlobalVariables.isKopperChatting)
         {
             _isShow = true;
-            Cloud1.SetActive(true);
-            LeanTween.scale(Cloud1, new Vector3(1f, 1f), 0.7f).setEaseInBounce().setOnComplete(_funShowCloud2);
+            Invoke(nameof(ActivateCloud1),1f);
+            
         }
         else if(GlobalVariables.isLevel && _isShow)
         {
@@ -32,8 +32,18 @@ public class MemoryCloudController : MonoBehaviour
             LeanTween.scale(Cloud3, new Vector3(0f, 0f), 0.3f).setEaseInSine().setOnComplete(_funHideCloud2);
         }
     }
+    private void ActivateCloud1()
+    {
+        Cloud1.SetActive(true);
+        LeanTween.scale(Cloud1, new Vector3(1f, 1f), 0.7f).setEaseInBounce().setOnComplete(_funShowCloud2);
+    }
     private void _funShowCloud2()
     {
+        Invoke(nameof(ActivateCloud2),0.5f);
+    }
+    private void ActivateCloud2()
+    {
+
         Cloud2.SetActive(true);
         LeanTween.scale(Cloud2, new Vector3(1f, 1f), 0.7f).setEaseInBounce().setOnComplete(_funShowCloud3);
     }
@@ -44,6 +54,11 @@ public class MemoryCloudController : MonoBehaviour
 
     private void _funShowCloud3()
     {
+        Invoke(nameof(ActivateCloud3),0.5f );
+    }
+    private void ActivateCloud3()
+    {
+
         Cloud3.SetActive(true);
         LeanTween.scale(Cloud3, new Vector3(1.3f, 1.3f), 0.7f).setEaseInBounce();
     }

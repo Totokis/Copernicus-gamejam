@@ -46,7 +46,25 @@ public class StateController : MonoBehaviour
     {
         title.GetComponent<CanvasGroupFadeController>().Desactivate();
         beginInstruction.GetComponent<GetAnyKeyToContinue>().Desactivate();
-        
         gameController.ActivateKopperComing();
+    }
+    public void KopperFinishedSliding()
+    {
+        gameController.DeactivateKopperChatting();
+    }
+    public void ShowSpeechLines()
+    {
+        Invoke(nameof(KopperFinishedSliding),2f);
+        //TODO michau zrob
+    }
+
+    public void FinishLevel()
+    {
+        gameController.DeactivateLevel();
+    }
+    
+    public void StartLevel()
+    {
+        gameController.ActivateLevel();
     }
 }

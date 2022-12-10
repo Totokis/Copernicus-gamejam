@@ -61,4 +61,16 @@ public class GameController : MonoBehaviour
     {
         _isKopperSlidingToScreen = true;
     }
+    public void DeactivateKopperChatting()
+    {
+        _isKopperChatting = false;
+    }
+    public void DeactivateLevel()
+    {
+        _isLevel = false;
+    }
+    public void ActivateLevel()
+    {
+        _isLevel = true;
+    }
 }
