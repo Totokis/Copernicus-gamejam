@@ -12,6 +12,11 @@ public class HexNode : MonoBehaviour
     public HexNode downRight;
     public HexNode downLeft;
 
+    public Boolean IsCompleted;
+    public List<MoveDirection> VisitsFromWhereDirections;
 
-    public Boolean IsVisited;
+    private void Start()
+    {
+        VisitsFromWhereDirections = new List<MoveDirection>();
+    }
 }

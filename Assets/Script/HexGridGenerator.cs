@@ -7,6 +7,20 @@ using UnityEngine;
 
 public class HexGridGenerator : MonoBehaviour
 {
+    public static HexGridGenerator Instance;
+
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     public Vector2 StartNodePosition = new Vector2(4.5f, 2.2375f);
     public HexNode StartNode;
 
@@ -130,6 +144,7 @@ public class HexGridGenerator : MonoBehaviour
         }
 
         StartNode = allNodes.First(n => n.transform.position.x == StartNodePosition.x && n.transform.position.y == StartNodePosition.y);
+        //StartNode.IsVisited = true;
         GameObject player = Instantiate(objPlayerPrefab, mapParent.transform).gameObject;
         player.transform.position = StartNodePosition;
         player.GetComponent<Player>().CurrentNode = StartNode;
