@@ -31,7 +31,7 @@ public class AsterismPathRenderer : MonoBehaviour
 
     }
 
-    private void Start() => DrawTestLine();
+    //private void Start() => DrawTestLine();
 
 
     private void DrawTestLine()
