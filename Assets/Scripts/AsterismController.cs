@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AsterismController : MonoBehaviour
 {
     public static AsterismController Instance;
     public Transform trInstructionPopup;
-    private int currentAsterismIndex = 4;
-    public int getcurasterindex() => currentAsterismIndex;
+    private int currentAsterismIndex = 0;
+    public int CurrentAsteriumIndex() => currentAsterismIndex;
     public Transform trThoughtParent;
 
     //private MoveDirection up = MoveDirection.Up;
@@ -164,7 +165,13 @@ public class AsterismController : MonoBehaviour
 
     public void NextLevel()
     {
-        CurrentAsterism = asterisms[++currentAsterismIndex];
+        CurrentAsterism = asterisms.ElementAtOrDefault(++currentAsterismIndex);
+        if (CurrentAsterism == null)
+        {
+            print("Koniec");
+            StateController.Instance.End();
+
+        }
     }
 
     // Update is called once per frame

@@ -30,7 +30,7 @@ public class AsterismSinglePathRenderer : MonoBehaviour
         }
         else
         {
-            if (AsterismController.Instance.getcurasterindex() == 4)
+            if (AsterismController.Instance.CurrentAsteriumIndex() == 4)
             {
                 col = Color.red;
             }
@@ -65,7 +65,7 @@ public class AsterismSinglePathRenderer : MonoBehaviour
             yield return null;
         }
     }
-    public void DrawPolygon(List<Vector2> points)
+    public void DrawPolygon(List<Vector2> points, Action action)
     {
         pointsCount = points.Count;
         linePoints = points;
@@ -76,10 +76,10 @@ public class AsterismSinglePathRenderer : MonoBehaviour
             lineRenderer.Points.Add(Vector2.zero);
         }
 
-        StartCoroutine(AnimatePolygon());
+        StartCoroutine(AnimatePolygon(action));
     }
 
-    private IEnumerator AnimatePolygon()
+    private IEnumerator AnimatePolygon(Action action)
     {
 
         var segmentDuration = wholeAnimationDuration / pointsCount;
@@ -105,5 +105,8 @@ public class AsterismSinglePathRenderer : MonoBehaviour
             }
 
         }
+
+        yield return new WaitForSeconds(0.5f);
+        action.Invoke();
     }
 }

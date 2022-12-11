@@ -47,7 +47,7 @@ public class AsterismPathRenderer : MonoBehaviour
         return (lr, added);
     }
 
-    public void DrawWholePath()
+    public void DrawWholePath(Action action=null)
     {
         print("HUUUU");
         singlePathRenderers.ForEach(line=>line.gameObject.SetActive(false));
@@ -57,7 +57,7 @@ public class AsterismPathRenderer : MonoBehaviour
             Destroy(asterismSinglePathRenderer.gameObject);
         } 
         singlePathRenderers.Add(Instantiate(singlePathRendererPrefab,transform)); 
-        singlePathRenderers.Last().DrawPolygon(points);
+        singlePathRenderers.Last().DrawPolygon(new List<Vector2>(points),action);
     }
 
     public void Resett()
@@ -68,6 +68,7 @@ public class AsterismPathRenderer : MonoBehaviour
                 Destroy(ren.gameObject);
         }
         singlePathRenderers.Clear();
+        points.Clear();
     }
 
     //private void Start() => DrawTestLine();

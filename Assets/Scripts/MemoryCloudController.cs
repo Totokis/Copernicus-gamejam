@@ -23,7 +23,7 @@ public class MemoryCloudController : MonoBehaviour
         if(!GlobalVariables.isLevel && !_isShow && !GlobalVariables.isKopperChatting)
         {
             _isShow = true;
-            Invoke(nameof(ActivateCloud1), 1.5f);
+            Invoke(nameof(ActivateCloud1), 0.75f);
             
         }
         else if(GlobalVariables.isLevel && _isShow)
@@ -39,7 +39,7 @@ public class MemoryCloudController : MonoBehaviour
     }
     private void _funShowCloud2()
     {
-        Invoke(nameof(ActivateCloud2),0.5f);
+        Invoke(nameof(ActivateCloud2),0.1f);
     }
     private void ActivateCloud2()
     {

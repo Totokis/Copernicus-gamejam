@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 2278686420187590882}
   animationDuration: 0.5
+  wholeAnimationDuration: 3.5
   _mainCamera: {fileID: 0}
 --- !u!1001 &8628668854922484966
 PrefabInstance:

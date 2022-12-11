@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         GlobalVariables.isLevel = _isLevel;
         GlobalVariables.isKopperChatting = _isKopperChatting;
         GlobalVariables.isKopperSlidingToScreen = _isKopperSlidingToScreen;
-        GlobalVariables.isLogoOnScreen = _isLogoShow;
+    //    GlobalVariables.isLogoOnScreen = _isLogoShow;
 
         _funSetGroundBrightness();
     }
