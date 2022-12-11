@@ -68,5 +68,8 @@ public class MemoryCloudController : MonoBehaviour
         Cloud1.SetActive(false);
         Cloud2.SetActive(false);
         Cloud3.SetActive(false);
+
+        AsterismPathRenderer.Instance.Resett();
+        AsterismController.Instance.ClearThoughts();
     }
 }

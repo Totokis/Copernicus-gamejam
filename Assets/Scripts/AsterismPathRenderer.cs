@@ -58,6 +58,11 @@ public class AsterismPathRenderer : MonoBehaviour
 
     public void Resett()
     {
+        foreach(var ren in singlePathRenderers)
+        {
+            if (ren)
+                Destroy(ren.gameObject);
+        }
         singlePathRenderers.Clear();
     }
 

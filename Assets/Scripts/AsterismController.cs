@@ -91,10 +91,19 @@ public class AsterismController : MonoBehaviour
 
     public List<AsterismPathInfo> CurrentAsterism;
 
-
+    public Vector3 thoughtsInitialPosition;
     void Start()
     {
+        thoughtsInitialPosition = trThoughtParent.transform.position;
         CurrentAsterism = asterisms[currentAsterismIndex];
+    }
+
+    public void ClearThoughts()
+    {
+        foreach (Transform child in trThoughtParent)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
     public void NextLevel()

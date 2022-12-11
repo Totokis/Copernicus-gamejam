@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StateController : MonoBehaviour
 {
-    
+
     [SerializeField] private GameObject title;
     [SerializeField] private float showTitleAfterTime = 5f;
     [SerializeField] private GameObject beginInstruction;
@@ -26,10 +26,10 @@ public class StateController : MonoBehaviour
     }
     private void Start()
     {
-        Invoke(nameof(ShowTitle),showTitleAfterTime);
-        Invoke(nameof(ShowBeginInstruction),showBeginInstructionAfterTime);
+        Invoke(nameof(ShowTitle), showTitleAfterTime);
+        Invoke(nameof(ShowBeginInstruction), showBeginInstructionAfterTime);
 
-        
+
     }
     private void ShowBeginInstruction()
     {
@@ -50,24 +50,42 @@ public class StateController : MonoBehaviour
     }
     public void KopperFinishedSliding()
     {
-        HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position,AsterismController.Instance.trThoughtParent,true);
+        HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
         gameController.DeactivateKopperChatting();
     }
     public void ShowSpeechLines()
     {
-        Invoke(nameof(KopperFinishedSliding),2f);
-        Invoke(nameof(StartLevel),8f);
+        Invoke(nameof(KopperFinishedSliding), 2f);
+        Invoke(nameof(StartLevel), 8f);
         //TODO michau zrob
+    }
+
+    private IEnumerator DeleteCurrentBoard()
+    {
+        yield return new WaitForSeconds(2f);
+        Player player = FindObjectOfType<Player>();
+        player.PlayerPossibleMovesRenderer.Resett();
+
+        foreach (Transform child in HexGridGenerator.Instance.CurrentBoardTransform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        
     }
 
     public void FinishLevel()
     {
         AsterismController.Instance.NextLevel();
+        StartCoroutine(DeleteCurrentBoard());
+
+        AsterismController.Instance.trThoughtParent.position = AsterismController.Instance.thoughtsInitialPosition;
+        HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
+
         gameController.DeactivateLevel();
-        
-        Invoke(nameof(StartLevel),5f);
+
+        Invoke(nameof(StartLevel), 5f);
     }
-    
+
     public void StartLevel()
     {
         HexGridGenerator.Instance.SpawnMap();

@@ -227,9 +227,15 @@ public class HexGridGenerator : MonoBehaviour
         }
     }
 
+    public Transform CurrentBoardTransform;
     public void SpawnMap()
     {
+        trCurrentMapTransform.transform.position = Vector3.zero;
+        trCurrentMapTransform.transform.localScale = Vector3.one;
+
+        CurrentBoardTransform = trCurrentMapTransform;
         SpawnMapAt(MapPosition, trCurrentMapTransform, false);
+    
     }
 }
 
