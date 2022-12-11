@@ -50,21 +50,31 @@ public class StateController : MonoBehaviour
     }
     public void KopperFinishedSliding()
     {
+        HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position,AsterismController.Instance.trThoughtParent,true);
         gameController.DeactivateKopperChatting();
     }
     public void ShowSpeechLines()
     {
         Invoke(nameof(KopperFinishedSliding),2f);
+        Invoke(nameof(StartLevel),8f);
         //TODO michau zrob
     }
 
     public void FinishLevel()
     {
+        AsterismController.Instance.NextLevel();
         gameController.DeactivateLevel();
+        
+        Invoke(nameof(StartLevel),5f);
     }
     
     public void StartLevel()
     {
+        HexGridGenerator.Instance.SpawnMap();
         gameController.ActivateLevel();
+    }
+    public void PlanshaCompleted()
+    {
+        FinishLevel();
     }
 }

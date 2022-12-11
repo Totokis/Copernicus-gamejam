@@ -172,7 +172,9 @@ public class Player : MonoBehaviour
             
 
             if (currentAsterismCOMPLETEDDetected == currentAsterismCOMPLETESToSuccess)
-                Debug.Log("Sukces");
+            {
+                StateController.Instance.PlanshaCompleted();
+            }
 
             if (!currentMoveWasInAsterismPath)
             {

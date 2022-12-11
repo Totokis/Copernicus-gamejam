@@ -227,10 +227,9 @@ public class HexGridGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void SpawnMap()
     {
         SpawnMapAt(MapPosition, trCurrentMapTransform, false);
-
     }
 }
 

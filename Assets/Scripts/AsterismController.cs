@@ -6,7 +6,7 @@ public class AsterismController : MonoBehaviour
 {
     public static AsterismController Instance;
     public Transform trInstructionPopup;
-
+    private int currentAsterismIndex = 0;
     public Transform trThoughtParent;
 
     private void Awake()
@@ -91,18 +91,18 @@ public class AsterismController : MonoBehaviour
 
     public List<AsterismPathInfo> CurrentAsterism;
 
+
     void Start()
     {
-        CurrentAsterism = asterisms[0];
+        CurrentAsterism = asterisms[currentAsterismIndex];
+    }
 
-        HexGridGenerator.Instance.SpawnMapAt(trInstructionPopup.position, trThoughtParent, true);
+    public void NextLevel()
+    {
+        CurrentAsterism = asterisms[++currentAsterismIndex];
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
 
 public enum MoveDirection
