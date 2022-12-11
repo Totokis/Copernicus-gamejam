@@ -52,46 +52,30 @@ public class StateController : MonoBehaviour
         beginInstruction.GetComponent<GetAnyKeyToContinue>().Desactivate();
         gameController.ActivateKopperComing();
     }
-    public void KopperFinishedSliding()
-    {
-        HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
-        timer.SetActive(true);
-        Timer.Restart(5f,()=>gameController.DeactivateKopperChatting());
-        
-    }
+    
     public void ShowSpeechLines()
     {
-        Invoke(nameof(KopperFinishedSliding), 2f);
-        Invoke(nameof(StartLevel), 8f);
+        print("Mowie se o czyms");
+        
+        Invoke(nameof(KopperRotates), 2f);
+        
         //TODO michau zrob
     }
-
-    private IEnumerator DeleteCurrentBoard()
+    
+    public void KopperRotates()
     {
-        yield return new WaitForSeconds(2f);
-        Player player = FindObjectOfType<Player>();
-        player.PlayerPossibleMovesRenderer.Resett();
-
-        foreach (Transform child in HexGridGenerator.Instance.CurrentBoardTransform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
         
-    }
+        timer.SetActive(true);
+        gameController.StartShowingThoughtMap();
 
-    public void FinishLevel()
+    }
+    
+    public void CloudCompleted()
     {
-        AsterismController.Instance.NextLevel();
-        StartCoroutine(DeleteCurrentBoard());
-
-        AsterismController.Instance.trThoughtParent.position = AsterismController.Instance.thoughtsInitialPosition;
         HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
-
-        gameController.DeactivateLevel();
-
-        Invoke(nameof(StartLevel), 5f);
+        Timer.Restart(5f,StartLevel);
     }
-
+    
     public void StartLevel()
     {
         HexGridGenerator.Instance.SpawnMap();
@@ -101,10 +85,36 @@ public class StateController : MonoBehaviour
         gameController.ActivateLevel();
         
     }
+    
+    public void FinishLevel()
+    {
+        AsterismController.Instance.NextLevel();
+        StartCoroutine(DeleteCurrentBoard());
+
+        AsterismController.Instance.trThoughtParent.position = AsterismController.Instance.thoughtsInitialPosition;
+        //HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
+
+        gameController.DeactivateLevel();
+        
+    }
+    
+    private IEnumerator DeleteCurrentBoard()
+    {
+        yield return new WaitForSeconds(2f);
+        Player player = FindObjectOfType<Player>();
+        player.PlayerPossibleMovesRenderer.Resett();
+
+        foreach (Transform child in HexGridGenerator.Instance.CurrentBoardTransform)
+        {
+            Destroy(child.gameObject);
+        }
+        
+    }
+    
     public void PlanshaCompleted()
     {
         AsterismPathRenderer.Instance.DrawWholePath();
-        
         FinishLevel();
     }
+   
 }

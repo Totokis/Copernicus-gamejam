@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
     {
         _isKopperSlidingToScreen = true;
     }
-    public void DeactivateKopperChatting()
+    public void StartShowingThoughtMap()
     {
         _isKopperChatting = false;
     }

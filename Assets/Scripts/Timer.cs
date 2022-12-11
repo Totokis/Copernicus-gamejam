@@ -30,8 +30,6 @@ public class Timer : MonoBehaviour
     {
         _time = 0f;
         cgThis.alpha = 1f;
-
-        Restart(4f,()=>{});
     }
 
     private Action onCompleted;

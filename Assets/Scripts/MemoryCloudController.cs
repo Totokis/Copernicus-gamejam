@@ -58,9 +58,12 @@ public class MemoryCloudController : MonoBehaviour
     }
     private void ActivateCloud3()
     {
-
         Cloud3.SetActive(true);
-        LeanTween.scale(Cloud3, new Vector3(1.3f, 1.3f), 0.7f).setEaseInBounce();
+        LeanTween.scale(Cloud3, new Vector3(1.3f, 1.3f), 0.7f).setEaseInBounce().setOnComplete(() =>
+        {
+            StateController.Instance.CloudCompleted();    
+        });
+        
     }
     private void _funHideCloud3()
     {

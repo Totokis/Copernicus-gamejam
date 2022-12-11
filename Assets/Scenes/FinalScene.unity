@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e372d07384aa55f4c8f087ae08bcd6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundGround: {fileID: 0}
+  _backgroundGround: {fileID: 1952965156}
 --- !u!1001 &401614462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2316,7 +2316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e372d07384aa55f4c8f087ae08bcd6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundGround: {fileID: 0}
+  _backgroundGround: {fileID: 1952965156}
 --- !u!114 &1663872646
 MonoBehaviour:
   m_ObjectHideFlags: 0
