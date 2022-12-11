@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(CancelMove(movingToNextNodeTween, nodeBefore, lineJustDrawn));
 
-                Debug.LogError("SKUCHA");
+                Debug.LogError("SKUCHA");Debug.Log("Krrk");//Do
             }
             else
             {
