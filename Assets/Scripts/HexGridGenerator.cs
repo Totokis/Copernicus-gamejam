@@ -219,6 +219,7 @@ public class HexGridGenerator : MonoBehaviour
 
             currentNodeChecking.gameObject.layer = LayerMask.NameToLayer("noPostProcesing");
             currentNodeChecking.colorrrr = Color.black;
+            currentNodeChecking.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             AsterismPathRenderer.Instance.DrawLineFromPointToPoint(lastNodePos, currentNodeChecking.transform.position, Color.black);
             lastNodePos = currentNodeChecking.transform.position;
 

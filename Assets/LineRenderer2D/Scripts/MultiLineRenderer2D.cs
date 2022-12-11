@@ -46,6 +46,11 @@ namespace Game.Core.Rendering
         [SerializeField]
         protected SpriteRenderer m_Renderer;
 
+        public void makerendererdinsidemask()
+        {
+            m_Renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        }
+
         [Tooltip("The color of the line.")]
         //[OnValueChanged("SetColor")]
         //[FoldoutGroup("Settings")]
