@@ -31,14 +31,17 @@ public class Timer : MonoBehaviour
         _time = 0f;
         cgThis.alpha = 1f;
 
-        Restart(4f);
+        Restart(4f,()=>{});
     }
 
-    public static void Restart(Single countFrom)
+    private Action onCompleted;
+
+    public static void Restart(Single countFrom, Action onCompleted = null)
     {
         Timer timer = FindObjectOfType<Timer>();
-
+        timer.onCompleted = onCompleted;
         timer.RestarttWithCountingFrom(countFrom);
+        
     }
 
     private void RestarttWithCountingFrom(Single val)
@@ -68,6 +71,7 @@ public class Timer : MonoBehaviour
             {
                 TimeIsUp = true;
                 _going = false;
+                onCompleted?.Invoke();
             }
 
             SetText(_time);

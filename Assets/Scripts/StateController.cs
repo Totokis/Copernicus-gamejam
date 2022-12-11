@@ -11,6 +11,8 @@ public class StateController : MonoBehaviour
     [SerializeField] private GameObject beginInstruction;
     [SerializeField] private float showBeginInstructionAfterTime = 7f;
     [SerializeField] private GameController gameController;
+    [SerializeField] private GameObject timer;
+    [SerializeField] private GameObject pressR;
     public static StateController Instance;
 
     private void Awake()
@@ -26,6 +28,8 @@ public class StateController : MonoBehaviour
     }
     private void Start()
     {
+        timer.SetActive(false);
+        pressR.SetActive(false);
         Invoke(nameof(ShowTitle), showTitleAfterTime);
         Invoke(nameof(ShowBeginInstruction), showBeginInstructionAfterTime);
 
@@ -51,7 +55,9 @@ public class StateController : MonoBehaviour
     public void KopperFinishedSliding()
     {
         HexGridGenerator.Instance.SpawnMapAt(AsterismController.Instance.trInstructionPopup.position, AsterismController.Instance.trThoughtParent, true);
-        gameController.DeactivateKopperChatting();
+        timer.SetActive(true);
+        Timer.Restart(5f,()=>gameController.DeactivateKopperChatting());
+        
     }
     public void ShowSpeechLines()
     {
@@ -89,10 +95,16 @@ public class StateController : MonoBehaviour
     public void StartLevel()
     {
         HexGridGenerator.Instance.SpawnMap();
+        timer.SetActive(true);
+        pressR.SetActive(true);
+        Timer.Restart(10f);
         gameController.ActivateLevel();
+        
     }
     public void PlanshaCompleted()
     {
+        AsterismPathRenderer.Instance.DrawWholePath();
+        
         FinishLevel();
     }
 }

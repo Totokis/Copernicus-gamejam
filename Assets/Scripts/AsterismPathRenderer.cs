@@ -28,17 +28,21 @@ public class AsterismPathRenderer : MonoBehaviour
 
     public void RemoveFromBadMove(AsterismSinglePathRenderer toremove) => singlePathRenderers.Remove(toremove);
 
-    public (MultiLineRenderer2D lr,  AsterismSinglePathRenderer ar) DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB, Color? col = null)
+    public (MultiLineRenderer2D lr,  AsterismSinglePathRenderer ar) DrawLineFromPointToPoint(Vector3 pointA, Vector3 pointB, Color? col = null,bool attachToFinalAnimation=false)
     {
         AsterismSinglePathRenderer added = Instantiate(singlePathRendererPrefab, transform);
         
         singlePathRenderers.Add(added);
         var lr = singlePathRenderers.Last().DrawLine(pointA, pointB, col);
-        if (points.Count == 0)
+
+        if (attachToFinalAnimation)
         {
-            points.Add(pointA);
+            if (points.Count == 0)
+            {
+                points.Add(pointA);
+            }
+            points.Add(pointB);    
         }
-        points.Add(pointB);
 
         return (lr, added);
     }

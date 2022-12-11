@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
 
         if (moved)
         {
-            (Game.Core.Rendering.MultiLineRenderer2D lr, AsterismSinglePathRenderer ar) lineJustDrawn = AsterismPathRenderer.Instance.DrawLineFromPointToPoint(fromLinePos, CurrentNode.transform.position);
+            (Game.Core.Rendering.MultiLineRenderer2D lr, AsterismSinglePathRenderer ar) lineJustDrawn = AsterismPathRenderer.Instance.DrawLineFromPointToPoint(fromLinePos, CurrentNode.transform.position,null,true);
 
             var movingToNextNodeTween = LeanTween.move(gameObject, CurrentNode.transform.position, 0.4f)
                 .setEaseOutSine()
