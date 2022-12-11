@@ -69,7 +69,7 @@ public class KopernikusController : MonoBehaviour
     private void _funDestroyObjectAndScale()
     {
         Destroy(_kopernicjumFront);
-        gameObject.transform.localPosition = new Vector3(-4.46f, -6.85f, -2.1f);
+        gameObject.transform.localPosition = new Vector3(-2.937f, -6.85f, -2.1f);
         LeanTween.scaleX(gameObject, 1.5f, 0.4f);
     }
 }
