@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
 
     internal void ResetOnGrid()
     {
-        //jazda
+        //siemsdfa
         transform.position = _lastStaringNode.transform.position;
         CurrentNode = _lastStaringNode;
 
